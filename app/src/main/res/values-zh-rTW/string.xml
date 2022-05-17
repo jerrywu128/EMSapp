@@ -1,0 +1,4 @@
+<resources>
+    <string name="app_name">EMSapp</string>
+    <string name="qrcode_tp_error">QR Code 格式錯誤!</string>
+</resources>
