@@ -175,6 +175,7 @@
                     app:maskColor="#77000000"
                     android:visibility="visible"/>
 
+
                 <TextView
                     android:id="@+id/qrscanner_text"
                     android:layout_width="fill_parent"
@@ -187,6 +188,7 @@
                     android:textColor="@color/white"
                     android:textSize="25dp" />
             </LinearLayout>
+
 
     </LinearLayout>
 

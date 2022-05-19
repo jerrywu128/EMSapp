@@ -59,13 +59,15 @@ public class ConnectEMSActivity extends BaseActivity{
         }
 
         presenter.connectWifiQ(this,wifi_ssid,wifi_pw);
-        new Handler().postDelayed(new Runnable() {
-            @Override
-            public void run() {
-                presenter.launchEMS();
+        if (Build.VERSION.SDK_INT < Build.VERSION_CODES.Q) {
+            new Handler().postDelayed(new Runnable() {
+                @Override
+                public void run() {
+                    presenter.launchEMS();
 
-            }
-        }, 7500);
+                }
+            }, 7500);
+        }
 
     }
 }

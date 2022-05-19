@@ -119,7 +119,7 @@ public class LaunchPresenter extends BasePresenter {
         StringBuilder userInfo = new StringBuilder();
         userInfo.append("Hospital:"+hospital+"\n");
         userInfo.append("Section:"+section+"\n");
-        userInfo.append("Job Number:"+job_number+"\n");
+        userInfo.append("Job_Number:"+job_number+"\n");
         userInfo.append("Name:"+user_name+"\n");
         userInfo.append("Date:"+getCurrentDate()+"\n");
         userInfo.append("Validation:"+ getAppValidationCode(user_name)+"\n");
