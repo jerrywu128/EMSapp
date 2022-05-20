@@ -41,7 +41,7 @@ import com.honestmc.ems.View.Interface.LaunchView;
 
 
 
-public class LaunchActivity extends BaseActivity implements LaunchView , View.OnClickListener{
+public class LaunchActivity extends BaseActivity implements LaunchView {
     private static String TAG = "LaunchActivity";
     private TextView qrScannerText;
     private ListView camSlotListView;
@@ -64,21 +64,15 @@ public class LaunchActivity extends BaseActivity implements LaunchView , View.On
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_launch);
-
         launchLayout = (LinearLayout) findViewById(R.id.launch_view);
-        editLayout = (LinearLayout) findViewById(R.id.launch_edit);
         qrLayout = (LinearLayout) findViewById(R.id.launch_qr);
 
 
         scannerView = (CodeScannerView) findViewById(R.id.qrcode_scanner);
         qrScannerText = (TextView) findViewById(R.id.qrscanner_text);
-        go_ScannerBtn = (Button) findViewById(R.id.go_scanner_btn);
-        go_ScannerBtn.setOnClickListener(this);
 
-        hospital_edit = (EditText) findViewById(R.id.hospital_title);
-        section_edit = (EditText) findViewById(R.id.section_title);
-        job_number_edit = (EditText) findViewById(R.id.job_number_title);
-        user_name_edit = (EditText) findViewById(R.id.user_name);
+
+
 
         presenter = new LaunchPresenter(LaunchActivity.this);
         presenter.setView(this);
@@ -155,48 +149,8 @@ public class LaunchActivity extends BaseActivity implements LaunchView , View.On
 
             });
 
-    @Override
-    public void onClick(View v) {
-        switch (v.getId()) {
-            case R.id.go_scanner_btn:
-                    if(!presenter.check_edit_have_null()){
-                        if(presenter.writeInfoToFile(editGetString(hospital_edit),editGetString(section_edit),
-                                                     editGetString(job_number_edit),editGetString(user_name_edit))) {
-                            editLayout.setVisibility(View.GONE);
-                            qrLayout.setVisibility(View.VISIBLE);
-                        }
-                        else{
-                            Toast.makeText(LaunchActivity.this,"Info Error Can't Write",Toast.LENGTH_LONG).show();
-                        }
-                    }else{
-                        Toast.makeText(LaunchActivity.this,"null",Toast.LENGTH_LONG).show();
-                    }
-                break;
-        }
-    }
 
-    private String editGetString(EditText editText){
-        return editText.getText().toString();
-    }
 
-    @Override
-    public boolean check_edit_have_null(){
-
-        if(hospital_edit.getText().toString().matches("")){
-            return true;
-        }
-        if(section_edit.getText().toString().matches("")){
-            return true;
-        }
-        if(job_number_edit.getText().toString().matches("")){
-            return true;
-        }
-        if(user_name_edit.getText().toString().matches("")){
-            return true;
-        }
-
-        return false;
-    }
 
 
 

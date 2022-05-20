@@ -47,6 +47,27 @@
             android:theme="@style/AppTheme.NoActionBar"
          >
         </activity>
+        <activity
+            android:name="com.honestmc.ems.View.Activity.EditActivity"
+            android:launchMode="singleTask"
+            android:screenOrientation="sensorPortrait"
+            android:theme="@style/AppTheme.NoActionBar"
+            android:exported="true">
 
+        </activity>
+        <activity
+            android:name="com.honestmc.ems.View.Activity.UserBrowseActivity"
+            android:launchMode="singleTask"
+            android:screenOrientation="sensorPortrait"
+            android:theme="@style/AppTheme.NoActionBar"
+            >
+        </activity>
+        <activity
+            android:name="com.honestmc.ems.View.Activity.FileBrowseActivity"
+            android:launchMode="singleTask"
+            android:screenOrientation="sensorPortrait"
+            android:theme="@style/AppTheme.NoActionBar"
+            >
+        </activity>
     </application>
 </manifest>

@@ -12,4 +12,11 @@
         <item name="windowActionBar">false</item>
         <item name="windowNoTitle">true</item>
     </style>
+
+    <style name="toolbar_theme" parent="@style/Theme.AppCompat.DayNight.DarkActionBar">
+        <item name="colorControlNormal">@color/white</item>
+        <item name="android:actionBarSize">46dp</item>
+        <item name="android:textColorPrimary">@color/white</item>
+    </style>
+
 </resources>

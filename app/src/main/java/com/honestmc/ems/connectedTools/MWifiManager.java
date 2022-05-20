@@ -166,8 +166,7 @@ public class MWifiManager {
                         new Handler().postDelayed(new Runnable() {
                             @Override
                             public void run() {
-                                connectEMS.launchEMS();
-
+                                connectEMS.change_launch();
                             }
                         }, 500);
 

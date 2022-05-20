@@ -76,65 +76,6 @@ public class LaunchPresenter extends BasePresenter {
             return false;
     }
 
-    public boolean check_edit_have_null(){
-        return launchView.check_edit_have_null();
-    }
 
-    public String getCurrentDate(){
-        long time = System.currentTimeMillis();
-        Date date = new Date(time);
-        SimpleDateFormat sdf = new SimpleDateFormat("yyyy/MM/dd_HH/mm/ss", Locale.CHINA);
-        return sdf.format(date);
-    }
-
-    public String getAppValidationCode(String name){
-        String inputString = name + "/honestmc-tw";
-        MessageDigest md = null;
-        String strDes = null;
-        byte[] bt = inputString.getBytes();
-        try {
-            md = MessageDigest.getInstance("SHA-256");
-            md.update(bt);
-            strDes = bytes2Hex(md.digest());
-        } catch (NoSuchAlgorithmException e) {
-            return null;
-        }
-        return strDes;
-    }
-
-    private static String bytes2Hex(byte[] bts) {
-        String des = "";
-        String tmp = null;
-        for (int i = 0; i < bts.length; i++) {
-            tmp = (Integer.toHexString(bts[i] & 0xFF));
-            if (tmp.length() == 1) {
-                des += "0";
-            }
-            des += tmp;
-        }
-        return des;
-    }
-
-    public boolean writeInfoToFile(String hospital,String section,String job_number,String user_name){
-        StringBuilder userInfo = new StringBuilder();
-        userInfo.append("Hospital:"+hospital+"\n");
-        userInfo.append("Section:"+section+"\n");
-        userInfo.append("Job_Number:"+job_number+"\n");
-        userInfo.append("Name:"+user_name+"\n");
-        userInfo.append("Date:"+getCurrentDate()+"\n");
-        userInfo.append("Validation:"+ getAppValidationCode(user_name)+"\n");
-
-        try {
-            OutputStreamWriter outputStreamWriter = new OutputStreamWriter(activity.openFileOutput("USER_INFO", Context.MODE_PRIVATE));
-            outputStreamWriter.write(userInfo.toString());
-            outputStreamWriter.close();
-            return true;
-        }
-        catch (IOException e) {
-            Log.e("Exception", "File write failed: " + e.toString());
-            return false;
-        }
-
-    }
 
 }
