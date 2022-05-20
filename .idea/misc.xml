@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="DesignSurface">
+    <option name="filePathToZoomLevelMap">
+      <map>
+        <entry key="app/src/main/res/drawable/button_shape.xml" value="0.152" />
+        <entry key="app/src/main/res/layout/activity_file_browse.xml" value="0.22708333333333333" />
+        <entry key="app/src/main/res/layout/activity_launch.xml" value="0.19630192502532928" />
+        <entry key="app/src/main/res/layout/activity_qrcode_connect_wifi.xml" value="0.11775362318840579" />
+        <entry key="app/src/main/res/layout/activity_user_browse.xml" value="0.2006340579710145" />
+        <entry key="app/src/main/res/layout/activity_user_info.xml" value="0.40260416666666665" />
+        <entry key="app/src/main/res/layout/content_file_browse.xml" value="0.22708333333333333" />
+        <entry key="app/src/main/res/layout/content_file_folder.xml" value="0.2006340579710145" />
+        <entry key="app/src/main/res/layout/content_launch.xml" value="0.19630192502532928" />
+        <entry key="app/src/main/res/layout/content_user_browse.xml" value="0.2006340579710145" />
+        <entry key="app/src/main/res/layout/content_user_folder.xml" value="0.228125" />
+        <entry key="app/src/main/res/layout/file_browse_edit_view.xml" value="0.22708333333333333" />
+      </map>
+    </option>
+  </component>
+  <component name="ExternalStorageConfigurationManager" enabled="true" />
+  <component name="ProjectRootManager" version="2" languageLevel="JDK_11" project-jdk-name="11" project-jdk-type="JavaSDK" />
+</project>
