@@ -24,7 +24,7 @@ public class FileBrowseActivity extends BaseActivity{
     private String TAG = "FileBrowseActivity";
 
     private FileBrowsePresenter presenter;
-    private  user_name_Adapter adapter;
+    private  user_file_Adapter adapter;
 
 
     ListView listView;
@@ -58,14 +58,14 @@ public class FileBrowseActivity extends BaseActivity{
                 try {
 
                     List<String> name = new ArrayList<>();
-                    name = presenter.getUsers("/"+user_name);
+                    name = presenter.getfiles("/"+user_name);
                     List<String> finalName = name;
                     runOnUiThread(new Runnable() {
 
                         @Override
                         public void run() {
 
-                            adapter= new user_name_Adapter(FileBrowseActivity.this, finalName);
+                            adapter= new user_file_Adapter(FileBrowseActivity.this, finalName);
                             listView.setAdapter(adapter);
 
 
@@ -79,14 +79,12 @@ public class FileBrowseActivity extends BaseActivity{
 
             }
         }).start();
-        List<String> name = new ArrayList<>();
-        user_file_Adapter adapter= new user_file_Adapter(this,name);
-        listView.setAdapter(adapter);
+
 
         listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> adapterView, View view, int position, long id) {
-                Toast.makeText(FileBrowseActivity.this, Integer.toString(position), Toast.LENGTH_SHORT).show();
+                presenter.browse_files(adapter.getItem(position));
             }
         });
 

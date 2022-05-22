@@ -86,10 +86,7 @@ public class UserBrowseActivity extends BaseActivity implements UserBrowseView {
 
 
 
-        List<String> name = new ArrayList<>();
 
-        adapter= new user_name_Adapter(UserBrowseActivity.this,name);
-        listView.setAdapter(adapter);
 
 
 

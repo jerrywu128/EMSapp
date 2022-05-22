@@ -7,6 +7,7 @@ import android.os.Parcelable;
 import android.util.Log;
 import android.widget.Toast;
 
+import org.apache.commons.net.ftp.FTP;
 import org.apache.commons.net.ftp.FTPClient;
 import org.apache.commons.net.ftp.FTPFile;
 
@@ -16,6 +17,7 @@ import java.util.List;
 public class FTPClientTool implements Parcelable {
     private String emsUser_INFO = "USER_INFO";
     private String ip = "192.168.31.1";
+    //private String ip = "61.70.133.35";
     private String userName = "pi";
     private String password = "Honestmc12345";
     private String work_path = "/home/pi/report";

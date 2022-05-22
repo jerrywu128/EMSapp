@@ -4,6 +4,8 @@
     <option name="filePathToZoomLevelMap">
       <map>
         <entry key="app/src/main/res/drawable/button_shape.xml" value="0.152" />
+        <entry key="app/src/main/res/layout/activity_edit.xml" value="0.17395833333333333" />
+        <entry key="app/src/main/res/layout/activity_ems_video.xml" value="0.1296875" />
         <entry key="app/src/main/res/layout/activity_file_browse.xml" value="0.22708333333333333" />
         <entry key="app/src/main/res/layout/activity_launch.xml" value="0.19630192502532928" />
         <entry key="app/src/main/res/layout/activity_qrcode_connect_wifi.xml" value="0.11775362318840579" />
@@ -15,6 +17,7 @@
         <entry key="app/src/main/res/layout/content_user_browse.xml" value="0.2006340579710145" />
         <entry key="app/src/main/res/layout/content_user_folder.xml" value="0.228125" />
         <entry key="app/src/main/res/layout/file_browse_edit_view.xml" value="0.22708333333333333" />
+        <entry key="app/src/main/res/xml/provider_paths.xml" value="0.184375" />
       </map>
     </option>
   </component>

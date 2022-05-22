@@ -1,21 +1,34 @@
 package com.honestmc.ems.Presenter;
 
 import android.app.Activity;
+import android.content.ActivityNotFoundException;
 import android.content.Intent;
+import android.net.Uri;
+import android.os.Bundle;
 import android.os.Looper;
 import android.util.Log;
 import android.widget.Toast;
 
+import androidx.core.content.FileProvider;
 import androidx.fragment.app.FragmentActivity;
 import androidx.fragment.app.FragmentManager;
 
+import com.honestmc.ems.View.Activity.FileBrowseActivity;
 import com.honestmc.ems.View.Activity.LaunchActivity;
+import com.honestmc.ems.View.Activity.VideoPlayActivity;
 import com.honestmc.ems.View.Interface.UserBrowseView;
 import com.honestmc.ems.connectedTools.FTPClientTool;
 
+import org.apache.commons.net.ftp.FTP;
 import org.apache.commons.net.ftp.FTPClient;
 import org.apache.commons.net.ftp.FTPFile;
 
+import java.io.BufferedOutputStream;
+import java.io.File;
+import java.io.FileOutputStream;
+import java.io.InputStream;
+import java.io.OutputStream;
+import java.nio.charset.StandardCharsets;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.concurrent.Executor;
@@ -28,6 +41,7 @@ public class FileBrowsePresenter extends BasePresenter{
     private Activity activity;
     private FragmentManager fragmentManager;
     private int offset = 0;
+    private String user_name;
     UserBrowseView userBrowseView;
 
 
@@ -46,10 +60,7 @@ public class FileBrowsePresenter extends BasePresenter{
 
     }
 
-    public void browse_file_files(int position){
-        Intent mainIntent = new Intent(activity, LaunchActivity.class);
-        activity.startActivity(mainIntent);
-    }
+
 
     public void FTPConnect(){
 
@@ -75,13 +86,13 @@ public class FileBrowsePresenter extends BasePresenter{
 
     }
 
-    public List<String> getUsers(String s){
+    public List<String> getfiles(String s){
 
         List<String> n = new ArrayList<>();
 
 
         try {
-
+            user_name = s;
             ftpClient.enterLocalPassiveMode();
             boolean change = ftpClient.changeWorkingDirectory("/home/pi/report"+s);
             FTPFile[] files = ftpClient.listFiles();
@@ -96,10 +107,131 @@ public class FileBrowsePresenter extends BasePresenter{
             Log.e("fileis",e.toString());
         }
 
-
-
-
         return n;
     }
+
+    public void browse_files(String i){
+        if(i.toString().contains(".mp4")){
+            Log.i("user_report&video","this is mp4!");
+            new Thread(new Runnable(){
+                @Override
+                public void run() {
+                    try {
+                        ftpClient.setFileType(FTP.BINARY_FILE_TYPE);
+
+                        ftpClient.changeWorkingDirectory("/home/pi/report"+user_name);
+                        InputStream input = ftpClient.retrieveFileStream(i);
+                        File file = new File(activity.getCacheDir(), "/" + i);
+                        FileOutputStream fos = null;
+                        fos = new FileOutputStream(file);
+
+                        BufferedOutputStream bout = new BufferedOutputStream(fos,1024);
+                        byte[] data = new byte[1024];
+                        int count  = 0;
+                        while ((count = input.read(data,0,1024)) >=0) {
+                            bout.write(data, 0, count);
+                        }
+
+                        input.close();
+                        bout.flush();
+                        bout.close();
+
+
+                        fos.flush();
+                        fos.close();
+
+
+                        if(ftpClient.completePendingCommand()) {
+
+                            if (true) {
+                                Log.i("download_vdo", "success");
+                                Intent mainIntent = new Intent(activity, VideoPlayActivity.class);
+                                Bundle bundle = new Bundle();
+                                bundle.putString("cache_path", activity.getCacheDir() + "/" + i);
+                                mainIntent.putExtras(bundle);
+                                activity.startActivity(mainIntent);
+                            } else {
+                                Log.e("download_vdo", "error");
+                            }
+                        }
+                    }catch (Exception e){
+                        Log.e("download_vdo",e.toString());
+                    }
+
+                }
+            }).start();
+
+        }else if(i.toString().contains(".pdf")){
+            Log.i("user_report&video","this is pdf!");
+            new Thread(new Runnable(){
+                @Override
+                public void run() {
+                    try {
+                        ftpClient.setFileType(FTP.BINARY_FILE_TYPE);
+
+                        ftpClient.changeWorkingDirectory("/home/pi/report"+user_name);
+                        InputStream input = ftpClient.retrieveFileStream(i);
+                        File file = new File(activity.getCacheDir(), "/" + i);
+                        FileOutputStream fos = null;
+                        fos = new FileOutputStream(file);
+
+                        BufferedOutputStream bout = new BufferedOutputStream(fos,1024);
+                        byte[] data = new byte[1024];
+                        int count  = 0;
+                        while ((count = input.read(data,0,1024)) >=0) {
+                            bout.write(data, 0, count);
+                        }
+
+                        input.close();
+                        bout.flush();
+                        bout.close();
+
+
+                        fos.flush();
+                        fos.close();
+
+
+                        if(ftpClient.completePendingCommand()) {
+
+                            if (true) {
+                                Log.i("download_pdf", "success");
+
+
+                                    File pdffile = new File(activity.getCacheDir(), "/" + i);
+                                    if (pdffile.exists()) {
+
+                                        Uri path = FileProvider.getUriForFile(activity, activity.getApplicationContext().getPackageName() + ".provider", pdffile);
+
+                                        Log.i("pdf",path.getPath());
+                                        Log.i("cachepdf",activity.getCacheDir()+"/" + i);
+                                        Intent intent = new Intent(Intent.ACTION_VIEW);
+                                        intent.setDataAndType(path, "application/pdf");
+                                        intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+                                        intent.addFlags(Intent.FLAG_GRANT_READ_URI_PERMISSION);
+
+                                        try {
+                                            activity.startActivity(intent);
+                                        } catch (ActivityNotFoundException e) {
+
+                                        }
+
+                                    }
+
+                            } else {
+                                Log.e("download_pdf", "error");
+                            }
+                        }
+                    }catch (Exception e){
+                        Log.e("download_pdf",e.toString());
+                    }
+
+                }
+            }).start();
+        }else{
+            Log.i("user_report&video","this is other");
+        }
+
+    }
+
 
 }

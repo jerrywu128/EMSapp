@@ -28,7 +28,7 @@ public class user_file_Adapter extends BaseAdapter {
     }
 
     @Override
-    public Object getItem(int position) {
+    public String getItem(int position) {
         return file_names.get(position);
     }
 
