@@ -2,6 +2,7 @@ package com.honestmc.ems.View.Activity;
 
 import android.content.Intent;
 import android.media.MediaPlayer;
+import android.os.Build;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.KeyEvent;
@@ -53,7 +54,16 @@ public class VideoPlayActivity  extends BaseActivity{
         videoView.setMediaController(mediacontroller);
         videoView.setVideoPath(videoPath);
         videoView.requestFocus();
+        videoView.setOnPreparedListener(new MediaPlayer.OnPreparedListener() {
+            @Override
+            public void onPrepared(MediaPlayer mp) {
+                mp.setVideoScalingMode(MediaPlayer.VIDEO_SCALING_MODE_SCALE_TO_FIT_WITH_CROPPING);
+            }
+        });
+
         videoView.setOnCompletionListener(new MediaPlayer.OnCompletionListener() {
+
+
             @Override
             public void onCompletion(MediaPlayer mp) {
                 // Toast.makeText(getApplicationContext(), "Video over", Toast.LENGTH_SHORT).show();
@@ -119,6 +129,7 @@ public class VideoPlayActivity  extends BaseActivity{
         }
         return true;
     }
+
 
 
 }
