@@ -10,15 +10,15 @@
 
     <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="0dp"
-        android:layout_weight="4"
+        android:layout_height="match_parent"
         android:gravity="center_horizontal"
         android:orientation="vertical">
 
 
         <TextView
             android:layout_width="wrap_content"
-            android:layout_height="250dp"
+            android:layout_height="0dp"
+            android:layout_weight="4"
             android:fadeScrollbars="true"
             android:gravity="center"
             android:maxLines="5"
@@ -28,25 +28,23 @@
         <TextView
             android:id="@+id/test"
             android:background="#8b7347"
+            android:layout_gravity="center"
+            android:gravity="center"
             android:layout_width="250dp"
-            android:layout_height="wrap_content"
+            android:layout_height="0dp"
+            android:layout_weight="0.8"
             android:layout_marginBottom="10dp"
             android:textAlignment="center"
             android:text="test"
-            android:textColor="@android:color/black"
-            android:textSize="25sp" />
+            android:textColor="@android:color/white"
+            android:textSize="20dp" />
 
 
 
         <TextView
-
             android:layout_width="wrap_content"
-            android:layout_height="50dp"
-            android:fadeScrollbars="true"
-            android:gravity="center"
-            android:maxLines="5"
-            android:padding="10dp"
-            android:scrollbars="vertical"
+            android:layout_height="0dp"
+            android:layout_weight="9"
             />
 
 

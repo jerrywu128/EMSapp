@@ -2,4 +2,16 @@
     <string name="app_name">EMSapp</string>
     <string name="qrcode_tp_error">二维码格式错误!</string>
     <string name="action_processing">处理中...</string>
+    <string name="launch_text">请扫描EMS上的二维码</string>
+    <string name="Hospital">医院</string>
+    <string name="Section">科别</string>
+    <string name="Job_Number">工号</string>
+    <string name="Name">姓名</string>
+    <string name="Sure">确定</string>
+    <string name="Browse">浏览</string>
+    <string name="Connecting">连线中...</string>
+    <string name="Ftp_Connect_Success">EMS连线成功!</string>
+    <string name="edit_null">栏位资讯不可为空!</string>
+    <string name="upload_success">上传成功!</string>
+    <string name="upload_fail">上传失败，请确认装置连线!</string>
 </resources>

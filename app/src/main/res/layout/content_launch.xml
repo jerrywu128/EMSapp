@@ -23,7 +23,13 @@
                 android:orientation="vertical"
                 android:background="@color/white"
                 android:visibility="visible">
-
+                <ImageView
+                    android:layout_width="match_parent"
+                    android:layout_height="0dp"
+                    android:layout_weight="0.4"
+                    android:src="@drawable/honestmclogo"
+                    android:padding="10dp"
+                    />
                 <com.budiyev.android.codescanner.CodeScannerView
                     android:id="@+id/qrcode_scanner"
                     android:layout_width="match_parent"
@@ -53,9 +59,9 @@
                     android:background="#8b7347"
                     android:gravity="center"
                     android:layout_gravity="center"
-                    android:text="EMS APP"
+                    android:text="@string/launch_text"
                     android:textColor="@color/white"
-                    android:textSize="25dp" />
+                    android:textSize="20dp" />
             </LinearLayout>
 
 

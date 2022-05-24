@@ -8,6 +8,7 @@ import android.os.Looper;
 import android.util.Log;
 import android.widget.Toast;
 
+import com.honestmc.ems.R;
 import com.honestmc.ems.View.Activity.EditActivity;
 import com.honestmc.ems.View.Activity.UserBrowseActivity;
 import com.honestmc.ems.View.Interface.EditView;
@@ -82,12 +83,13 @@ public class EditPresenter extends BasePresenter{
 
     public boolean writeInfoToFile(String hospital,String section,String job_number,String user_name){
         StringBuilder userInfo = new StringBuilder();
-        userInfo.append("Hospital:"+hospital+"\n");
-        userInfo.append("Section:"+section+"\n");
-        userInfo.append("Job_Number:"+job_number+"\n");
-        userInfo.append("Name:"+user_name+"\n");
-        userInfo.append("Date:"+getCurrentDate()+"\n");
-        userInfo.append("Validation:"+ getAppValidationCode(user_name)+"\n");
+
+        userInfo.append("{\"Hospital\":\""+hospital+"\",");
+        userInfo.append("\"Section\":\""+section+"\",");
+        userInfo.append("\"Job_Number\":\""+job_number+"\",");
+        userInfo.append("\"Name\":\""+user_name+"\""+",");
+        userInfo.append("\"Date\":\""+getCurrentDate()+"\",");
+        userInfo.append("\"Validation\":\""+ getAppValidationCode(user_name)+"\"}");
 
         try {
             OutputStreamWriter outputStreamWriter = new OutputStreamWriter(activity.openFileOutput("USER_INFO", Context.MODE_PRIVATE));
@@ -117,10 +119,17 @@ public class EditPresenter extends BasePresenter{
                         boolean result = false;
                         result = ftpClient.storeFile(new String("USER_INFO".getBytes(encoding), "iso-8859-1"), in);
                         if (result) {
-                            Toast.makeText(activity,"上傳成功!",Toast.LENGTH_LONG).show();
                             Log.i("ftp-file","上傳成功!");
+                            //Looper.prepare();
+                            //Toast.makeText(activity,activity.getString(R.string.upload_success),Toast.LENGTH_LONG).show();
+                            //Looper.loop();
+
                         }else {
                             Log.e("ftp-file","上傳失敗!");
+                            Looper.prepare();
+                            Toast.makeText(activity,activity.getString(R.string.upload_fail),Toast.LENGTH_LONG).show();
+                            Looper.loop();
+
                         }
                     }
                     int x = ftpClientTool.check_Info();
@@ -149,7 +158,7 @@ public class EditPresenter extends BasePresenter{
 
 
                 }catch (Exception e){
-                    Log.e("ftp-file","上傳error!");
+                    Log.e("ftp-file",e.toString());
                 }
             }
         });
@@ -170,7 +179,7 @@ public class EditPresenter extends BasePresenter{
                     ftpClient = ftpClientTool.getFTPClient();
                     Log.i("ftp","connect success!");
                     Looper.prepare();
-                    Toast.makeText(activity,"ftp connect success",Toast.LENGTH_LONG).show();
+                    Toast.makeText(activity, activity.getString(R.string.Ftp_Connect_Success),Toast.LENGTH_LONG).show();
                     Looper.loop();
                 }catch (Exception e){
                     Log.e("ftp","connect error!");

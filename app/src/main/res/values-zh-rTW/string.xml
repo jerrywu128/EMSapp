@@ -2,4 +2,16 @@
     <string name="app_name">EMSapp</string>
     <string name="qrcode_tp_error">QR Code 格式錯誤!</string>
     <string name="action_processing">處理中...</string>
+    <string name="launch_text">請掃描EMS上的QR Code</string>
+    <string name="Hospital">醫院</string>
+    <string name="Section">科別</string>
+    <string name="Job_Number">工號</string>
+    <string name="Name">姓名</string>
+    <string name="Sure">確定</string>
+    <string name="Browse">瀏覽</string>
+    <string name="Connecting">連線中...</string>
+    <string name="Ftp_Connect_Success">EMS連線成功!</string>
+    <string name="edit_null">欄位資訊不可為空!</string>
+    <string name="upload_success">上傳成功!</string>
+    <string name="upload_fail">上傳失敗，請確認裝置連線!</string>
 </resources>

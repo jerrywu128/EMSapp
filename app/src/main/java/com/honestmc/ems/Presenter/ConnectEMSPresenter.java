@@ -42,6 +42,7 @@ public class ConnectEMSPresenter extends BasePresenter{
     public void change_launch(){
         Intent mainIntent = new Intent(activity, EditActivity.class);
         activity.startActivity(mainIntent);
+        activity.finish();
     }
 
 

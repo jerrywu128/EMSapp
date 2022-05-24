@@ -53,14 +53,14 @@
         <TextView
             android:id="@+id/video_name"
             android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
+            android:layout_height="match_parent"
             android:layout_alignBottom="@+id/local_pb_back"
             android:layout_centerVertical="true"
             android:layout_toRightOf="@+id/local_pb_back"
             android:ellipsize="end"
-            android:padding="14dp"
+            android:gravity="center"
             android:singleLine="true"
-            android:textSize="12dp"
+            android:textSize="15dp"
             android:text="EMS.mp4"
             android:textColor="@color/white"
 

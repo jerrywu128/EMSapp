@@ -35,8 +35,12 @@ public class FileBrowseActivity extends BaseActivity{
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_file_browse);
+
         Intent intent = getIntent();
         String user_name = intent.getStringExtra("user_name");
+        presenter = new FileBrowsePresenter(this);
+        presenter.setView();
+        presenter.FTPConnect(user_name);
         Toolbar toolbar = (Toolbar) findViewById(R.id.ftoolbar);
         toolbar.setTitle(user_name);
         setSupportActionBar(toolbar);
@@ -49,9 +53,7 @@ public class FileBrowseActivity extends BaseActivity{
         listView = (ListView) findViewById(R.id.ems_file_list_view);
 
 
-        presenter = new FileBrowsePresenter(this);
-        presenter.setView();
-        presenter.FTPConnect();
+
 
         Handler handler;
         new Thread(new Runnable(){
@@ -69,7 +71,12 @@ public class FileBrowseActivity extends BaseActivity{
 
                             adapter= new user_file_Adapter(FileBrowseActivity.this, finalName);
                             listView.setAdapter(adapter);
-
+                            listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+                                @Override
+                                public void onItemClick(AdapterView<?> adapterView, View view, int position, long id) {
+                                    presenter.browse_files(adapter.getItem(position));
+                                }
+                            });
 
                         }
                     });
@@ -83,16 +90,24 @@ public class FileBrowseActivity extends BaseActivity{
         }).start();
 
 
-        listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
-            @Override
-            public void onItemClick(AdapterView<?> adapterView, View view, int position, long id) {
-                presenter.browse_files(adapter.getItem(position));
-            }
-        });
+
 
 
 
     }
+
+    @Override
+    protected void onDestroy() {
+        super.onDestroy();
+        Log.i("fileBrowseactivity","onDestroy");
+    }
+
+    @Override
+    protected void onStop() {
+        super.onStop();
+        Log.i("fileBrowseactivity","onStop");
+    }
+
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
         int id = item.getItemId();
@@ -102,6 +117,8 @@ public class FileBrowseActivity extends BaseActivity{
         }
         return super.onOptionsItemSelected(item);
     }
+
+
 
 
 }

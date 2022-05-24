@@ -24,7 +24,7 @@ public class ConnectEMSActivity extends BaseActivity{
         String wifitp = bundle2.getString("tp");
         presenter = new ConnectEMSPresenter(ConnectEMSActivity.this);
         this.setWifi_Link(wifissid,wifipw,wifitp);
-        text1.setText(wifissid+"conntecting...");
+        text1.setText(wifissid+" "+getApplicationContext().getString(R.string.Connecting));
 
     }
     @Override

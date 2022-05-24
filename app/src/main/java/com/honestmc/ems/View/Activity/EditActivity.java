@@ -2,6 +2,8 @@ package com.honestmc.ems.View.Activity;
 
 import android.Manifest;
 import android.os.Bundle;
+import android.text.InputFilter;
+import android.text.Spanned;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
@@ -11,6 +13,9 @@ import android.widget.Toast;
 import com.honestmc.ems.Presenter.EditPresenter;
 import com.honestmc.ems.R;
 import com.honestmc.ems.View.Interface.EditView;
+
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 
 public class EditActivity extends BaseActivity implements EditView, View.OnClickListener{
     private static String TAG = "EditActivity";
@@ -42,6 +47,11 @@ public class EditActivity extends BaseActivity implements EditView, View.OnClick
         job_number_edit = (EditText) findViewById(R.id.job_number_title);
         user_name_edit = (EditText) findViewById(R.id.user_name);
 
+        setEditTextInhibitInputSpeChat(hospital_edit);
+        setEditTextInhibitInputSpeChat(section_edit);
+        setEditTextInhibitInputSpeChat(job_number_edit);
+        setEditTextInhibitInputSpeChat(user_name_edit);
+
         presenter = new EditPresenter(EditActivity.this);
         presenter.setView(this);
         presenter.FTPConnect();
@@ -70,7 +80,7 @@ public class EditActivity extends BaseActivity implements EditView, View.OnClick
                         Toast.makeText(EditActivity.this,"Info Error Can't Write",Toast.LENGTH_LONG).show();
                     }
                 }else{
-                    Toast.makeText(EditActivity.this,"null",Toast.LENGTH_LONG).show();
+                    Toast.makeText(EditActivity.this, this.getString(R.string.edit_null),Toast.LENGTH_LONG).show();
                 }
                 break;
             case R.id.browse_btn:
@@ -101,5 +111,25 @@ public class EditActivity extends BaseActivity implements EditView, View.OnClick
 
         return false;
     }
+    public static void setEditTextInhibitInputSpeChat(EditText editText){
+
+        InputFilter filter=new InputFilter() {
+            @Override
+            public CharSequence filter(CharSequence source, int start, int end, Spanned dest, int dstart, int dend) {
+                for (int i = start; i < end; i++) {
+                    if ( !Character.isLetterOrDigit(source.charAt(i))
+                            && !Character.toString(source.charAt(i)) .equals("_")
+                            && !Character.toString(source.charAt(i)) .equals("-"))
+                    {
+                        return "";
+                    }
+                }
+                return null;
+
+            }
+        };
+        editText.setFilters(new InputFilter[]{filter});
+    }
+
 
 }

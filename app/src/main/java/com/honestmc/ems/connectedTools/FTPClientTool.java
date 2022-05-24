@@ -11,7 +11,9 @@ import org.apache.commons.net.ftp.FTP;
 import org.apache.commons.net.ftp.FTPClient;
 import org.apache.commons.net.ftp.FTPFile;
 
+import java.lang.reflect.Array;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 
 public class FTPClientTool implements Parcelable {
@@ -53,6 +55,8 @@ public class FTPClientTool implements Parcelable {
         ftpClient.connect(ip,21);
         ftpClient.enterLocalPassiveMode();
         ftpClient.login(userName, password);
+
+        ftpClient.setControlEncoding("UTF-8");
         this.ftpClient = ftpClient;
 
     }
@@ -61,41 +65,58 @@ public class FTPClientTool implements Parcelable {
     }
 
     public int check_Info() throws Exception{
-        int empty_count = 0;
-        Thread.sleep(5);
-        FTPFile[] files = ftpClient.listFiles();
+        int ok_or_error = 0;
+        int count = 0;
+        boolean find_ok = false;
+        while(!find_ok) {
+            FTPFile[] files = ftpClient.listFiles();
+            count ++;
+            for (FTPFile file : files) {
+                Log.i("fileis", file.toString());
 
-        for(FTPFile file : files){
-            Log.i("fileis",file.toString());
-            empty_count++;
+                if (file.getName().equals("INFO_OK")) {
+                   find_ok = true;
+                   ok_or_error = 1;
+                }
+
+                if (file.getName().equals("INFO_ERROR")) {
+                   find_ok = true;
+                   ok_or_error = 2;
+                }
 
 
-            if(file.getName().equals("INFO_OK")) {
-                if (ftpClient.deleteFile(work_path + "/" + file.getName())) {
+            }
+            Thread.sleep(1000);
+
+            if (count>30){
+                find_ok = true;
+                ok_or_error = 3;
+            }
+
+        }
+
+        switch (ok_or_error){
+            case 1:
+                if (ftpClient.deleteFile(work_path + "/INFO_OK")) {
                     return 1;
-                }else{
-                    Log.i("fileis",file.getName()+"delete failed");
+                } else {
+                    Log.i("fileis","INFO_OK delete failed");
                     return 2;
                 }
-            }
-
-            if(file.getName().equals("INFO_ERROR")){
-                Log.i("fileis",file.getName()+"info_error");
-                if (ftpClient.deleteFile(work_path + "/" + file.getName())) {
+            case 2:
+                if (ftpClient.deleteFile(work_path + "/INFO_ERROR")) {
                     return 3;
-                }else{
-                    Log.i("fileis",file.getName()+"delete failed");
+                } else {
+                    Log.i("fileis","INFO_ERROR delete failed");
                     return 4;
                 }
-            }
+            case 3:
+            default:
+                    return 6;
 
-            Thread.sleep(5);
+
         }
-        if(empty_count==0){
-            return 5;
-        }else{
-            return 6;
-        }
+
 
 
     }

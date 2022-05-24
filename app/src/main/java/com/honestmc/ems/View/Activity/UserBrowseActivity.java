@@ -42,7 +42,9 @@ public class UserBrowseActivity extends BaseActivity implements UserBrowseView {
         setContentView(R.layout.activity_user_browse);
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
-
+        presenter = new UserBrowsePresenter(this);
+        presenter.setView(this);
+        presenter.FTPConnect();
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
 
 
@@ -51,9 +53,7 @@ public class UserBrowseActivity extends BaseActivity implements UserBrowseView {
         listView = (ListView) findViewById(R.id.ems_user_list_view);
 
 
-        presenter = new UserBrowsePresenter(this);
-        presenter.setView(this);
-        presenter.FTPConnect();
+
 
         Handler handler;
         new Thread(new Runnable(){

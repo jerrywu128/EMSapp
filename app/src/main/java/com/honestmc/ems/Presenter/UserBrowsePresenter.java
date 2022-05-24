@@ -11,6 +11,8 @@ import android.widget.Toast;
 import androidx.fragment.app.FragmentActivity;
 import androidx.fragment.app.FragmentManager;
 
+import com.honestmc.ems.R;
+import com.honestmc.ems.Tools.EMSProgressDialog;
 import com.honestmc.ems.View.Activity.FileBrowseActivity;
 import com.honestmc.ems.View.Activity.LaunchActivity;
 import com.honestmc.ems.View.Interface.UserBrowseView;
@@ -52,6 +54,7 @@ public class UserBrowsePresenter extends BasePresenter{
 
     public void browse_user_files(Object i){
         Intent mainIntent = new Intent(activity, FileBrowseActivity.class);
+        Log.i("user_name",i.toString());
         Bundle bundle = new Bundle();
         bundle.putString("user_name",i.toString());
         mainIntent.putExtras(bundle);

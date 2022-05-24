@@ -65,8 +65,8 @@ public class FileBrowsePresenter extends BasePresenter{
 
 
 
-    public void FTPConnect(){
-
+    public void FTPConnect(String user_name){
+        EMSProgressDialog.showProgressDialog(activity, R.string.action_processing);
         Thread thread = new Thread(new Runnable(){
             @Override
             public void run() {
@@ -95,9 +95,12 @@ public class FileBrowsePresenter extends BasePresenter{
 
 
         try {
+
             user_name = s;
             ftpClient.enterLocalPassiveMode();
-            boolean change = ftpClient.changeWorkingDirectory("/home/pi/report"+s);
+            boolean change = ftpClient.changeWorkingDirectory(new String(("/home/pi/report"+s).getBytes(),FTP.DEFAULT_CONTROL_ENCODING));
+            Log.i("filebeowse_name",s);
+            Thread.sleep(5);//緩衝
             FTPFile[] files = ftpClient.listFiles();
             n.add("PDF");
             for(FTPFile file : files){
@@ -116,7 +119,7 @@ public class FileBrowsePresenter extends BasePresenter{
         }catch (Exception e){
             Log.e("fileis",e.toString());
         }
-
+        EMSProgressDialog.closeProgressDialog();
         return n;
     }
 
@@ -130,9 +133,8 @@ public class FileBrowsePresenter extends BasePresenter{
                 public void run() {
                     try {
                         ftpClient.setFileType(FTP.BINARY_FILE_TYPE);
-
-                        ftpClient.changeWorkingDirectory("/home/pi/report"+user_name);
-                        InputStream input = ftpClient.retrieveFileStream(i);
+                        ftpClient.changeWorkingDirectory(new String(("/home/pi/report"+user_name).getBytes(),FTP.DEFAULT_CONTROL_ENCODING));
+                        InputStream input = ftpClient.retrieveFileStream(new String(i.getBytes(),FTP.DEFAULT_CONTROL_ENCODING));
                         File file = new File(activity.getCacheDir(), "/" + i);
                         FileOutputStream fos = null;
                         fos = new FileOutputStream(file);
@@ -171,6 +173,7 @@ public class FileBrowsePresenter extends BasePresenter{
                         }
                     }catch (Exception e){
                         Log.e("download_vdo",e.toString());
+                        EMSProgressDialog.closeProgressDialog();
                     }
 
                 }
@@ -184,8 +187,8 @@ public class FileBrowsePresenter extends BasePresenter{
                     try {
                         ftpClient.setFileType(FTP.BINARY_FILE_TYPE);
 
-                        ftpClient.changeWorkingDirectory("/home/pi/report"+user_name);
-                        InputStream input = ftpClient.retrieveFileStream(i);
+                        ftpClient.changeWorkingDirectory(new String(("/home/pi/report"+user_name).getBytes(),FTP.DEFAULT_CONTROL_ENCODING));
+                        InputStream input = ftpClient.retrieveFileStream(new String(i.getBytes(),FTP.DEFAULT_CONTROL_ENCODING));
                         File file = new File(activity.getCacheDir(), "/" + i);
                         FileOutputStream fos = null;
                         fos = new FileOutputStream(file);
