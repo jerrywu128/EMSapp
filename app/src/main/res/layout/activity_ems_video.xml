@@ -28,9 +28,17 @@
         android:layout_width="fill_parent"
         android:layout_height="?attr/actionBarSize"
         android:layout_gravity="top"
-        android:background="#8b7347"
         android:weightSum="1"
+        android:background="#8b7347"
         >
+
+
+
+
+
+
+
+
 
         <ImageButton
             android:id="@+id/local_pb_back"
@@ -43,7 +51,7 @@
             android:src="@drawable/ic_baseline_arrow_back_24"/>
 
         <TextView
-            android:id="@+id/local_pb_video_name"
+            android:id="@+id/video_name"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_alignBottom="@+id/local_pb_back"
@@ -52,7 +60,7 @@
             android:ellipsize="end"
             android:padding="14dp"
             android:singleLine="true"
-            android:textSize="20dp"
+            android:textSize="12dp"
             android:text="EMS.mp4"
             android:textColor="@color/white"
 

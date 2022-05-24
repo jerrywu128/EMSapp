@@ -8,6 +8,7 @@ import android.os.Looper;
 import android.util.Log;
 import android.widget.Toast;
 
+import com.honestmc.ems.View.Activity.EditActivity;
 import com.honestmc.ems.View.Activity.UserBrowseActivity;
 import com.honestmc.ems.View.Interface.EditView;
 import com.honestmc.ems.connectedTools.FTPClientTool;
@@ -110,12 +111,13 @@ public class EditPresenter extends BasePresenter{
                 try{
                     FileInputStream in = new FileInputStream(new File(activity.getFilesDir().toString()+"/USER_INFO"));
                     String encoding = System.getProperty("file.encoding");
-                    boolean change = ftpClient.changeWorkingDirectory("/home/report");
+                    boolean change = ftpClient.changeWorkingDirectory("/home/pi/report");
                     ftpClient.setFileType(FTP.BINARY_FILE_TYPE);
                     if (change) {
                         boolean result = false;
                         result = ftpClient.storeFile(new String("USER_INFO".getBytes(encoding), "iso-8859-1"), in);
                         if (result) {
+                            Toast.makeText(activity,"上傳成功!",Toast.LENGTH_LONG).show();
                             Log.i("ftp-file","上傳成功!");
                         }else {
                             Log.e("ftp-file","上傳失敗!");

@@ -11,6 +11,7 @@ import android.widget.TextView;
 import com.honestmc.ems.R;
 
 import java.util.List;
+import java.util.Locale;
 
 public class user_file_Adapter extends BaseAdapter {
     private Context context;
@@ -47,7 +48,20 @@ public class user_file_Adapter extends BaseAdapter {
         }
         ImageView imageView = (ImageView) view.findViewById(R.id.file_img);
         TextView mTextView = (TextView) view.findViewById(R.id.file_name);
-
+        if(file_names.get(position).contains("PDF")||file_names.get(position).contains("MP4")){
+            mTextView.setBackgroundColor(context.getResources().getColor(R.color.half_transparent_grey));
+            mTextView.setTextColor(context.getResources().getColor(R.color.white));
+            imageView.setVisibility(View.GONE);
+        }else{
+            mTextView.setBackgroundColor(context.getResources().getColor(R.color.white));
+            mTextView.setTextColor(context.getResources().getColor(R.color.black));
+            imageView.setVisibility(View.VISIBLE);
+        }
+        if(file_names.get(position).toLowerCase(Locale.ROOT).contains("pdf")){
+            imageView.setImageResource(R.drawable.ic_baseline_picture_as_pdf_24);
+        }else{
+            imageView.setImageResource(R.drawable.ic_baseline_ondemand_video_24);
+        }
         mTextView.setText(file_names.get(position));
 
         return view;

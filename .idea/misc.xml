@@ -4,6 +4,8 @@
     <option name="filePathToZoomLevelMap">
       <map>
         <entry key="app/src/main/res/drawable/button_shape.xml" value="0.152" />
+        <entry key="app/src/main/res/drawable/rotate_progressbar.xml" value="0.1585" />
+        <entry key="app/src/main/res/drawable/shape_dialog_bg.xml" value="0.1585" />
         <entry key="app/src/main/res/layout/activity_edit.xml" value="0.17395833333333333" />
         <entry key="app/src/main/res/layout/activity_ems_video.xml" value="0.1296875" />
         <entry key="app/src/main/res/layout/activity_file_browse.xml" value="0.22708333333333333" />
@@ -17,6 +19,7 @@
         <entry key="app/src/main/res/layout/content_user_browse.xml" value="0.2006340579710145" />
         <entry key="app/src/main/res/layout/content_user_folder.xml" value="0.228125" />
         <entry key="app/src/main/res/layout/file_browse_edit_view.xml" value="0.22708333333333333" />
+        <entry key="app/src/main/res/layout/load_dialog.xml" value="0.17395833333333333" />
         <entry key="app/src/main/res/xml/provider_paths.xml" value="0.184375" />
       </map>
     </option>

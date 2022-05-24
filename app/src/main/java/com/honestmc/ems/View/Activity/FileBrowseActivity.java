@@ -35,10 +35,12 @@ public class FileBrowseActivity extends BaseActivity{
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_file_browse);
-        Toolbar toolbar = (Toolbar) findViewById(R.id.ftoolbar);
-        setSupportActionBar(toolbar);
         Intent intent = getIntent();
         String user_name = intent.getStringExtra("user_name");
+        Toolbar toolbar = (Toolbar) findViewById(R.id.ftoolbar);
+        toolbar.setTitle(user_name);
+        setSupportActionBar(toolbar);
+
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
 
 

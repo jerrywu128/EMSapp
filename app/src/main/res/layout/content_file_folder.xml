@@ -6,6 +6,7 @@
     android:background="@color/design_default_color_on_primary"
     android:orientation="horizontal"
     android:minHeight="62dp"
+
     android:visibility="visible">
 
     <ImageView
@@ -13,7 +14,8 @@
         android:layout_width="0dp"
         android:layout_weight="1"
         android:layout_height="match_parent"
-        android:src="@drawable/ic_baseline_dvr_24"
+        android:layout_margin="10dp"
+        android:src="@drawable/ic_baseline_ondemand_video_24"
         />
 
 
@@ -25,7 +27,7 @@
         android:layout_gravity="center"
         android:gravity="center"
         android:textColor="@color/black"
-        android:textSize="30dp"
+        android:textSize="15dp"
         android:text="test text"
         />
 

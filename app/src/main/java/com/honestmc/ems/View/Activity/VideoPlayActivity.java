@@ -2,7 +2,6 @@ package com.honestmc.ems.View.Activity;
 
 import android.content.Intent;
 import android.media.MediaPlayer;
-import android.os.Build;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.KeyEvent;
@@ -22,11 +21,12 @@ public class VideoPlayActivity  extends BaseActivity{
     private ImageButton back;
     private ImageButton delete;
     private RelativeLayout topBar;
-    private TextView localVideoNameTxv;
+    private TextView VideoNameTxv;
+
 
     private boolean isShowBar =true;
     private VideoPlayPresenter presenter;
-    private String videoPath;
+    private String videoPath,videoName;
     private VideoView videoView;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -34,14 +34,14 @@ public class VideoPlayActivity  extends BaseActivity{
         setContentView(R.layout.activity_ems_video);
         back = (ImageButton) findViewById(R.id.local_pb_back);
         delete = (ImageButton) findViewById(R.id.deleteBtn);
-
-        topBar = (RelativeLayout) findViewById(R.id.local_pb_top_layout);
-        //tlocalPbView = (MPreview) findViewById(R.id.local_pb_view);
-        localVideoNameTxv = (TextView)findViewById(R.id.local_pb_video_name);
         Intent intent = getIntent();
         Bundle data = intent.getExtras();
         videoPath = data.getString("cache_path");
+        videoName = data.getString("file_name");
+        topBar = (RelativeLayout) findViewById(R.id.local_pb_top_layout);
 
+        VideoNameTxv = (TextView)findViewById(R.id.video_name);
+        VideoNameTxv.setText(videoName);
         presenter = new VideoPlayPresenter(this,videoPath);
         presenter.setView();
 

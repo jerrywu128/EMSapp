@@ -1,6 +1,7 @@
 package com.honestmc.ems.Presenter;
 
 import android.app.Activity;
+import android.app.ProgressDialog;
 import android.content.ActivityNotFoundException;
 import android.content.Intent;
 import android.net.Uri;
@@ -13,6 +14,8 @@ import androidx.core.content.FileProvider;
 import androidx.fragment.app.FragmentActivity;
 import androidx.fragment.app.FragmentManager;
 
+import com.honestmc.ems.R;
+import com.honestmc.ems.Tools.EMSProgressDialog;
 import com.honestmc.ems.View.Activity.FileBrowseActivity;
 import com.honestmc.ems.View.Activity.LaunchActivity;
 import com.honestmc.ems.View.Activity.VideoPlayActivity;
@@ -96,12 +99,19 @@ public class FileBrowsePresenter extends BasePresenter{
             ftpClient.enterLocalPassiveMode();
             boolean change = ftpClient.changeWorkingDirectory("/home/pi/report"+s);
             FTPFile[] files = ftpClient.listFiles();
-
+            n.add("PDF");
             for(FTPFile file : files){
-                Log.i("fileis",file.toString());
-
+                if(file.getName().contains(".pdf")) {
+                    Log.i("fileis", file.toString());
                     n.add(file.getName());
-
+                }
+            }
+            n.add("MP4");
+            for(FTPFile file : files){
+                if(file.getName().contains(".mp4")) {
+                    Log.i("fileis", file.toString());
+                    n.add(file.getName());
+                }
             }
         }catch (Exception e){
             Log.e("fileis",e.toString());
@@ -111,7 +121,9 @@ public class FileBrowsePresenter extends BasePresenter{
     }
 
     public void browse_files(String i){
+        EMSProgressDialog.showProgressDialog(activity, R.string.action_processing);
         if(i.toString().contains(".mp4")){
+
             Log.i("user_report&video","this is mp4!");
             new Thread(new Runnable(){
                 @Override
@@ -148,11 +160,14 @@ public class FileBrowsePresenter extends BasePresenter{
                                 Intent mainIntent = new Intent(activity, VideoPlayActivity.class);
                                 Bundle bundle = new Bundle();
                                 bundle.putString("cache_path", activity.getCacheDir() + "/" + i);
+                                bundle.putString("file_name",i);
                                 mainIntent.putExtras(bundle);
                                 activity.startActivity(mainIntent);
                             } else {
                                 Log.e("download_vdo", "error");
                             }
+                            Thread.sleep(500);
+                            EMSProgressDialog.closeProgressDialog();
                         }
                     }catch (Exception e){
                         Log.e("download_vdo",e.toString());
@@ -221,14 +236,18 @@ public class FileBrowsePresenter extends BasePresenter{
                                 Log.e("download_pdf", "error");
                             }
                         }
+                        Thread.sleep(500);
+                        EMSProgressDialog.closeProgressDialog();
                     }catch (Exception e){
                         Log.e("download_pdf",e.toString());
                     }
 
                 }
             }).start();
+            EMSProgressDialog.closeProgressDialog();
         }else{
             Log.i("user_report&video","this is other");
+            EMSProgressDialog.closeProgressDialog();
         }
 
     }
