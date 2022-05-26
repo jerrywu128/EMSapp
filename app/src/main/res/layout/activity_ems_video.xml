@@ -67,7 +67,7 @@
             />
 
         <ImageButton
-            android:id="@+id/deleteBtn"
+            android:id="@+id/downloadBtn"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_centerVertical="true"
@@ -75,8 +75,8 @@
             android:layout_alignParentRight="true"
             android:background="#8b7347"
             android:padding="15dp"
-            android:src="@drawable/ic_baseline_delete_24"
-            android:visibility="gone"
+            android:src="@drawable/ic_baseline_file_download_24"
+            android:visibility="visible"
             />
 
     </RelativeLayout>

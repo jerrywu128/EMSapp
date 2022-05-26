@@ -18,25 +18,33 @@
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="0dp"
-                android:layout_weight="3"
+                android:layout_weight="3.3"
                 android:orientation="vertical"
                 android:background="@color/white"
                 android:visibility="visible">
                 <ImageView
                     android:layout_width="match_parent"
                     android:layout_height="0dp"
-                    android:layout_weight="1"
+                    android:layout_weight="1.6"
                     android:src="@drawable/honestmclogo"
-                    android:layout_margin="10dp"
+                    android:padding="4dp"
+                    android:layout_margin="8dp"
+                    />
+                <ImageView
+                    android:layout_width="match_parent"
+                    android:layout_height="0dp"
+                    android:layout_weight="8"
+                    android:src="@drawable/emslogo"
+                    android:background="#8b7347"
                     />
                 <TextView
                     android:layout_width="fill_parent"
                     android:layout_height="0dp"
-                    android:layout_weight="7"
+                    android:layout_weight="1.4"
                     android:background="#8b7347"
-                    android:text="EMS APP"
+                    android:text="@string/ERCP"
                     android:textColor="@color/white"
-                    android:textSize="25dp"
+                    android:textSize="20dp"
                     android:layout_gravity="center"
                     android:gravity="center"
                     />

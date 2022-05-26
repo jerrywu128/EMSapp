@@ -55,7 +55,6 @@ public class FTPClientTool implements Parcelable {
         ftpClient.connect(ip,21);
         ftpClient.enterLocalPassiveMode();
         ftpClient.login(userName, password);
-
         ftpClient.setControlEncoding("UTF-8");
         this.ftpClient = ftpClient;
 
@@ -88,7 +87,7 @@ public class FTPClientTool implements Parcelable {
             }
             Thread.sleep(1000);
 
-            if (count>30){
+            if (count>20){
                 find_ok = true;
                 ok_or_error = 3;
             }

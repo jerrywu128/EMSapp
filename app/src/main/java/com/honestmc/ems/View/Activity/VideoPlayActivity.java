@@ -1,5 +1,7 @@
 package com.honestmc.ems.View.Activity;
 
+import android.app.AlertDialog;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.media.MediaPlayer;
 import android.os.Bundle;
@@ -19,7 +21,7 @@ import com.honestmc.ems.R;
 public class VideoPlayActivity  extends BaseActivity{
     private String TAG = "VideoPlayActivity";
     private ImageButton back;
-    private ImageButton delete;
+    private ImageButton download;
     private RelativeLayout topBar;
     private TextView VideoNameTxv;
 
@@ -33,7 +35,7 @@ public class VideoPlayActivity  extends BaseActivity{
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_ems_video);
         back = (ImageButton) findViewById(R.id.local_pb_back);
-        delete = (ImageButton) findViewById(R.id.deleteBtn);
+        download = (ImageButton) findViewById(R.id.downloadBtn);
         Intent intent = getIntent();
         Bundle data = intent.getExtras();
         videoPath = data.getString("cache_path");
@@ -84,9 +86,33 @@ public class VideoPlayActivity  extends BaseActivity{
         });
 
 
-        delete.setOnClickListener(new View.OnClickListener() {
+        download.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                Log.d("video", videoPath);
+                AlertDialog dialog;
+                AlertDialog.Builder builder = new AlertDialog.Builder(VideoPlayActivity.this);
+                builder.setTitle(R.string.downloadMp4);
+                builder.setCancelable(true);
+                builder.setPositiveButton(R.string.Sure, new DialogInterface.OnClickListener() {
+
+                    @Override
+                    public void onClick(DialogInterface dialog, int which) {
+                        dialog.dismiss();
+                        presenter.downloadfile(videoPath,videoName);
+                    }
+                });
+                builder.setNegativeButton(R.string.Cancel, new DialogInterface.OnClickListener() {
+
+                    @Override
+                    public void onClick(DialogInterface dialog, int which) {
+
+                    }
+                });
+
+
+                dialog = builder.create();
+                dialog.show();
 
             }
         });

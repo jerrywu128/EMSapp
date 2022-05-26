@@ -10,6 +10,7 @@ import android.os.Build;
 import android.os.Bundle;
 import android.os.Handler;
 import android.provider.Settings;
+import android.util.Log;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
@@ -94,6 +95,7 @@ public class LaunchActivity extends BaseActivity implements LaunchView {
 
                                     result_data = result.getText();
 
+
                                 }
                                 else{
                                     presenter.setWifiwithQrcode(LaunchActivity.this, result.getText());
@@ -134,6 +136,7 @@ public class LaunchActivity extends BaseActivity implements LaunchView {
             ActivityCompat.requestPermissions(this, new String[]{Manifest.permission.CAMERA}, 50);
         else
             mCodeScanner.startPreview();
+        requestPermission();
 
     }
 
@@ -149,9 +152,23 @@ public class LaunchActivity extends BaseActivity implements LaunchView {
 
             });
 
+    private void requestPermission() {
 
+        if (ActivityCompat.checkSelfPermission(this, Manifest.permission.WRITE_EXTERNAL_STORAGE) != PackageManager.PERMISSION_GRANTED) {
+            ActivityCompat.requestPermissions(this, PERMISSIONS_STORAGE, 123);
+        }
+    }
+    @Override
+    public void onRequestPermissionsResult(int requestCode, @NonNull String[] permissions, @NonNull int[] grantResults) {
+        super.onRequestPermissionsResult(requestCode, permissions, grantResults);
 
+        for (int i = 0; i < permissions.length; i++) {
+            Log.i(TAG, "申请的权限为：" + permissions[i] + "，申请结果：" + grantResults[i]);
+        }
+    }
 
-
-
+    @Override
+    protected void onDestroy() {
+        super.onDestroy();
+    }
 }

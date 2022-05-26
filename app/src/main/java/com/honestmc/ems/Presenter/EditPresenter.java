@@ -137,12 +137,18 @@ public class EditPresenter extends BasePresenter{
                     switch (x){
                         case 1:
                             Log.i("ftp-file","have INFO-OK!");
+                            Looper.prepare();
+                            Toast.makeText(activity,activity.getString(R.string.upload_success),Toast.LENGTH_LONG).show();
+                            Looper.loop();
                             break;
                         case 2:
                             Log.e("ftp-file","have INFO-OK but delete failed!");
                             break;
                         case 3:
                             Log.i("ftp-file","have INFO-ERROR!");
+                            Looper.prepare();
+                            Toast.makeText(activity,activity.getString(R.string.upload_fail),Toast.LENGTH_LONG).show();
+                            Looper.loop();
                             break;
                         case 4:
                             Log.i("ftp-file","have INFO-ERROR but delete failed!");
@@ -152,6 +158,9 @@ public class EditPresenter extends BasePresenter{
                             break;
                         case 6:
                             Log.i("ftp-file","don't have OK or ERROR files!");
+                            Looper.prepare();
+                            Toast.makeText(activity,activity.getString(R.string.upload_fail),Toast.LENGTH_LONG).show();
+                            Looper.loop();
                             break;
                     }
 
