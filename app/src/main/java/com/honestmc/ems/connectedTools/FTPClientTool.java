@@ -67,10 +67,13 @@ public class FTPClientTool implements Parcelable {
         int ok_or_error = 0;
         int count = 0;
         boolean find_ok = false;
+
         while(!find_ok) {
             FTPFile[] files = ftpClient.listFiles();
             count ++;
             for (FTPFile file : files) {
+
+
                 Log.i("fileis", file.toString());
 
                 if (file.getName().equals("INFO_OK")) {
@@ -87,7 +90,7 @@ public class FTPClientTool implements Parcelable {
             }
             Thread.sleep(1000);
 
-            if (count>20){
+            if (count>15){
                 find_ok = true;
                 ok_or_error = 3;
             }

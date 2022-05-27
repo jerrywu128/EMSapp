@@ -32,6 +32,7 @@ import java.io.FileOutputStream;
 import java.io.InputStream;
 import java.io.OutputStream;
 import java.nio.charset.StandardCharsets;
+import java.text.DecimalFormat;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.concurrent.Executor;
@@ -104,16 +105,44 @@ public class FileBrowsePresenter extends BasePresenter{
             FTPFile[] files = ftpClient.listFiles();
             n.add("PDF");
             for(FTPFile file : files){
+                long file_size = file.getSize();
+                String file_size_float;
+                DecimalFormat decimalFormat = new DecimalFormat(".00");
+                StringBuilder file_size_KB_MB = new StringBuilder();
+                if(file_size/(1024*1024)>=1){
+                    file_size_float = decimalFormat.format((float)file_size/(1024*1024));
+                    file_size_KB_MB.append(file_size_float);
+                    file_size_KB_MB.append("MB");
+                }else{
+                    file_size_float = decimalFormat.format((float)file_size/(1024));
+                    file_size_KB_MB.append(file_size_float);
+                    file_size_KB_MB.append("KB");
+                }
                 if(file.getName().contains(".pdf")) {
-                    Log.i("fileis", file.toString());
-                    n.add(file.getName());
+                    Log.i("fileis", file.toString()+" size: "+file_size_KB_MB);
+                    String only_fileName = file.getName().split("-")[1];
+                    n.add(only_fileName);
                 }
             }
             n.add("MP4");
             for(FTPFile file : files){
+                long file_size = file.getSize();
+                String file_size_float;
+                DecimalFormat decimalFormat = new DecimalFormat(".00");
+                StringBuilder file_size_KB_MB = new StringBuilder();
+                if(file_size/(1024*1024)>=1){
+                    file_size_float = decimalFormat.format((float)file_size/(1024*1024));
+                    file_size_KB_MB.append(file_size_float);
+                    file_size_KB_MB.append("MB");
+                }else{
+                    file_size_float = decimalFormat.format((float)file_size/(1024));
+                    file_size_KB_MB.append(file_size_float);
+                    file_size_KB_MB.append("KB");
+                }
                 if(file.getName().contains(".mp4")) {
-                    Log.i("fileis", file.toString());
-                    n.add(file.getName());
+                    Log.i("fileis", file.toString()+" size: "+file_size_KB_MB);
+                    String only_fileName = file.getName().split("-")[1];
+                    n.add(only_fileName);
                 }
             }
         }catch (Exception e){
@@ -123,9 +152,13 @@ public class FileBrowsePresenter extends BasePresenter{
         return n;
     }
 
-    public void browse_files(String i){
+    public void browse_files(String filedate){
         EMSProgressDialog.showProgressDialog(activity, R.string.action_processing);
-        if(i.toString().contains(".mp4")){
+        if(filedate.toString().contains(".mp4")){
+            StringBuilder filename = new StringBuilder();
+            filename.append(user_name.split("/")[1]);
+            filename.append("-");
+            filename.append(filedate);
 
             Log.i("user_report&video","this is mp4!");
             new Thread(new Runnable(){
@@ -134,8 +167,8 @@ public class FileBrowsePresenter extends BasePresenter{
                     try {
                         ftpClient.setFileType(FTP.BINARY_FILE_TYPE);
                         ftpClient.changeWorkingDirectory(new String(("/home/pi/report"+user_name).getBytes(),FTP.DEFAULT_CONTROL_ENCODING));
-                        InputStream input = ftpClient.retrieveFileStream(new String(i.getBytes(),FTP.DEFAULT_CONTROL_ENCODING));
-                        File file = new File(activity.getCacheDir(), "/" + i);
+                        InputStream input = ftpClient.retrieveFileStream(new String(filename.toString().getBytes(),FTP.DEFAULT_CONTROL_ENCODING));
+                        File file = new File(activity.getCacheDir(), "/"+filename.toString());
                         FileOutputStream fos = null;
                         fos = new FileOutputStream(file);
 
@@ -161,8 +194,8 @@ public class FileBrowsePresenter extends BasePresenter{
                                 Log.i("download_vdo", "success");
                                 Intent mainIntent = new Intent(activity, VideoPlayActivity.class);
                                 Bundle bundle = new Bundle();
-                                bundle.putString("cache_path", activity.getCacheDir() + "/" + i);
-                                bundle.putString("file_name",i);
+                                bundle.putString("cache_path", activity.getCacheDir()+"/"+ filename);
+                                bundle.putString("file_name",filedate);
                                 mainIntent.putExtras(bundle);
                                 activity.startActivity(mainIntent);
                             } else {
@@ -179,7 +212,11 @@ public class FileBrowsePresenter extends BasePresenter{
                 }
             }).start();
 
-        }else if(i.toString().contains(".pdf")){
+        }else if(filedate.toString().contains(".pdf")){
+            StringBuilder filename = new StringBuilder();
+            filename.append(user_name.split("/")[1]);
+            filename.append("-");
+            filename.append(filedate);
             Log.i("user_report&video","this is pdf!");
             new Thread(new Runnable(){
                 @Override
@@ -188,8 +225,8 @@ public class FileBrowsePresenter extends BasePresenter{
                         ftpClient.setFileType(FTP.BINARY_FILE_TYPE);
 
                         ftpClient.changeWorkingDirectory(new String(("/home/pi/report"+user_name).getBytes(),FTP.DEFAULT_CONTROL_ENCODING));
-                        InputStream input = ftpClient.retrieveFileStream(new String(i.getBytes(),FTP.DEFAULT_CONTROL_ENCODING));
-                        File file = new File(activity.getCacheDir(), "/" + i);
+                        InputStream input = ftpClient.retrieveFileStream(new String(filename.toString().getBytes(),FTP.DEFAULT_CONTROL_ENCODING));
+                        File file = new File(activity.getCacheDir(), "/"+filename.toString());
                         FileOutputStream fos = null;
                         fos = new FileOutputStream(file);
 
@@ -215,13 +252,13 @@ public class FileBrowsePresenter extends BasePresenter{
                                 Log.i("download_pdf", "success");
 
 
-                                    File pdffile = new File(activity.getCacheDir(), "/" + i);
+                                    File pdffile = new File(activity.getCacheDir(), "/"+ filename);
                                     if (pdffile.exists()) {
 
                                         Uri path = FileProvider.getUriForFile(activity, activity.getApplicationContext().getPackageName() + ".provider", pdffile);
 
                                         Log.i("pdf",path.getPath());
-                                        Log.i("cachepdf",activity.getCacheDir()+"/" + i);
+                                        Log.i("cachepdf",activity.getCacheDir()+"/" + filename);
                                         Intent intent = new Intent(Intent.ACTION_VIEW);
                                         intent.setDataAndType(path, "application/pdf");
                                         intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);

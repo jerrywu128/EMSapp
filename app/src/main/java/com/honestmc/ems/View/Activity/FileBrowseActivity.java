@@ -43,6 +43,7 @@ public class FileBrowseActivity extends BaseActivity{
         presenter.FTPConnect(user_name);
         Toolbar toolbar = (Toolbar) findViewById(R.id.ftoolbar);
         toolbar.setTitle(user_name);
+
         setSupportActionBar(toolbar);
 
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);

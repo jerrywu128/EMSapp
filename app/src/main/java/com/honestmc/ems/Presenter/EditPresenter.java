@@ -9,6 +9,7 @@ import android.util.Log;
 import android.widget.Toast;
 
 import com.honestmc.ems.R;
+import com.honestmc.ems.Tools.EMSProgressDialog;
 import com.honestmc.ems.View.Activity.EditActivity;
 import com.honestmc.ems.View.Activity.UserBrowseActivity;
 import com.honestmc.ems.View.Interface.EditView;
@@ -49,7 +50,7 @@ public class EditPresenter extends BasePresenter{
     public String getCurrentDate(){
         long time = System.currentTimeMillis();
         Date date = new Date(time);
-        SimpleDateFormat sdf = new SimpleDateFormat("yyyy/MM/dd_HH/mm/ss", Locale.CHINA);
+        SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss", Locale.CHINA);
         return sdf.format(date);
     }
 
@@ -105,7 +106,7 @@ public class EditPresenter extends BasePresenter{
     }
 
     public void launchEMS(){
-
+        EMSProgressDialog.showProgressDialog(activity, R.string.action_processing);
         Thread thread = new Thread(new Runnable(){
             @Override
             public void run() {
@@ -137,27 +138,33 @@ public class EditPresenter extends BasePresenter{
                     switch (x){
                         case 1:
                             Log.i("ftp-file","have INFO-OK!");
+                            EMSProgressDialog.closeProgressDialog();
                             Looper.prepare();
                             Toast.makeText(activity,activity.getString(R.string.upload_success),Toast.LENGTH_LONG).show();
                             Looper.loop();
                             break;
                         case 2:
                             Log.e("ftp-file","have INFO-OK but delete failed!");
+                            EMSProgressDialog.closeProgressDialog();
                             break;
                         case 3:
                             Log.i("ftp-file","have INFO-ERROR!");
+                            EMSProgressDialog.closeProgressDialog();
                             Looper.prepare();
                             Toast.makeText(activity,activity.getString(R.string.upload_fail),Toast.LENGTH_LONG).show();
                             Looper.loop();
                             break;
                         case 4:
                             Log.i("ftp-file","have INFO-ERROR but delete failed!");
+                            EMSProgressDialog.closeProgressDialog();
                             break;
                         case 5:
                             Log.i("ftp-file","folder is empty!");
+                            EMSProgressDialog.closeProgressDialog();
                             break;
                         case 6:
                             Log.i("ftp-file","don't have OK or ERROR files!");
+                            EMSProgressDialog.closeProgressDialog();
                             Looper.prepare();
                             Toast.makeText(activity,activity.getString(R.string.upload_fail),Toast.LENGTH_LONG).show();
                             Looper.loop();
@@ -168,6 +175,7 @@ public class EditPresenter extends BasePresenter{
 
                 }catch (Exception e){
                     Log.e("ftp-file",e.toString());
+                    EMSProgressDialog.closeProgressDialog();
                 }
             }
         });

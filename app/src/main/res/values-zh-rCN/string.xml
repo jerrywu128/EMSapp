@@ -1,12 +1,12 @@
 <resources>
-    <string name="app_name">HonestmcEMS</string>
-    <string name="ERCP">ERCP Mechanical Simulator</string>
+    <string name="app_name">Honestmc EMS</string>
+    <string name="ERCP">ERCP Mechanical Simulator\n(EMS)</string>
     <string name="qrcode_tp_error">二维码格式错误!</string>
     <string name="action_processing">处理中...</string>
     <string name="launch_text">请扫描EMS上的二维码</string>
     <string name="Hospital">医院</string>
     <string name="Section">科别</string>
-    <string name="Job_Number">工号</string>
+    <string name="Job_Number">学员编号</string>
     <string name="Name">姓名</string>
     <string name="Sure">确定</string>
     <string name="Browse">浏览</string>

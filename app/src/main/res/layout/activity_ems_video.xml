@@ -56,6 +56,7 @@
             android:layout_height="match_parent"
             android:layout_alignBottom="@+id/local_pb_back"
             android:layout_centerVertical="true"
+            android:typeface="serif"
             android:layout_toRightOf="@+id/local_pb_back"
             android:ellipsize="end"
             android:gravity="center"

@@ -22,6 +22,8 @@
         android:layout_height="wrap_content"
         android:layout_marginTop="10dp"
         android:layout_gravity="center_horizontal"
+        android:typeface="serif"
+
         android:text="@string/action_processing"
         android:textColor="#f0f0f0"
         android:textSize="14sp"/>

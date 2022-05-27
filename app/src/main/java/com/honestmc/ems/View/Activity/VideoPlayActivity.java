@@ -39,6 +39,7 @@ public class VideoPlayActivity  extends BaseActivity{
         Intent intent = getIntent();
         Bundle data = intent.getExtras();
         videoPath = data.getString("cache_path");
+        Log.i("cache_path",videoPath);
         videoName = data.getString("file_name");
         topBar = (RelativeLayout) findViewById(R.id.local_pb_top_layout);
 

@@ -13,8 +13,10 @@
         >
 
         <androidx.appcompat.widget.Toolbar android:id="@+id/ftoolbar"
-            android:layout_width="match_parent" android:layout_height="?attr/actionBarSize"
+            android:layout_width="match_parent"
+            android:layout_height="?attr/actionBarSize"
             android:background="#8b7347"
+
             />
 
 
