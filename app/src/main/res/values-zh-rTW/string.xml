@@ -10,7 +10,7 @@
     <string name="Name">姓名</string>
     <string name="Sure">確定</string>
     <string name="Browse">瀏覽</string>
-    <string name="Connecting">EMS連線中...</string>
+    <string name="Connecting">EMS連線中.</string>
     <string name="Ftp_Connect_Success">EMS連線成功!</string>
     <string name="edit_null">欄位資訊不可為空!</string>
     <string name="upload_success">上傳成功!</string>

@@ -15,9 +15,19 @@
         <androidx.appcompat.widget.Toolbar android:id="@+id/ftoolbar"
             android:layout_width="match_parent"
             android:layout_height="?attr/actionBarSize"
-            android:background="#8b7347"
-
-            />
+            android:background="#8b7347">
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/app_name"
+                android:layout_gravity="center_vertical"
+                android:textColor="@color/white"
+                android:textSize="20dp"
+                android:typeface="serif"
+                android:textStyle="bold"
+                android:id="@+id/file_toolbarText"
+                />
+        </androidx.appcompat.widget.Toolbar>
 
 
 

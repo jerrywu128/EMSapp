@@ -3,7 +3,9 @@
   <component name="DesignSurface">
     <option name="filePathToZoomLevelMap">
       <map>
+        <entry key="app/src/main/res/drawable/button_selector.xml" value="0.1585" />
         <entry key="app/src/main/res/drawable/button_shape.xml" value="0.152" />
+        <entry key="app/src/main/res/drawable/button_shape_pressed.xml" value="0.1585" />
         <entry key="app/src/main/res/drawable/rotate_progressbar.xml" value="0.1585" />
         <entry key="app/src/main/res/drawable/shape_dialog_bg.xml" value="0.1585" />
         <entry key="app/src/main/res/layout/activity_edit.xml" value="0.2608642578125" />

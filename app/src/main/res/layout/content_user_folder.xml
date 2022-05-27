@@ -25,9 +25,9 @@
                 android:layout_height="match_parent"
                 android:layout_gravity="center"
                 android:typeface="serif"
-                android:gravity="center"
+                android:gravity="center_vertical"
                 android:textColor="@color/black"
-                android:textSize="25dp"
+                android:textSize="20dp"
                 android:text="test text"
                 />
             <TextView

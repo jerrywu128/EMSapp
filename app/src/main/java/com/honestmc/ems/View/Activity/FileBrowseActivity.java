@@ -8,6 +8,7 @@ import android.view.MenuItem;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ListView;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import androidx.appcompat.widget.Toolbar;
@@ -25,6 +26,7 @@ public class FileBrowseActivity extends BaseActivity{
 
     private FileBrowsePresenter presenter;
     private  user_file_Adapter adapter;
+    private TextView toolbarText;
 
 
     ListView listView;
@@ -42,7 +44,9 @@ public class FileBrowseActivity extends BaseActivity{
         presenter.setView();
         presenter.FTPConnect(user_name);
         Toolbar toolbar = (Toolbar) findViewById(R.id.ftoolbar);
-        toolbar.setTitle(user_name);
+        toolbarText = (TextView) findViewById(R.id.file_toolbarText);
+        toolbarText.setText(user_name);
+        toolbar.setTitle("");
 
         setSupportActionBar(toolbar);
 

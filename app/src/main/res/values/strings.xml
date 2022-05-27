@@ -10,7 +10,7 @@
     <string name="Name">Name</string>
     <string name="Sure">Sure</string>
     <string name="Browse">Browse</string>
-    <string name="Connecting">EMS Connecting...</string>
+    <string name="Connecting">EMS Connecting.</string>
     <string name="Ftp_Connect_Success">EMS Connect Success!</string>
     <string name="edit_null">Info cannot be empty!</string>
     <string name="upload_success">Upload Success!</string>

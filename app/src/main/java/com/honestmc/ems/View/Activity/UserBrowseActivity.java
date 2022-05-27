@@ -41,6 +41,7 @@ public class UserBrowseActivity extends BaseActivity implements UserBrowseView {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_user_browse);
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
+        toolbar.setTitle("");
         setSupportActionBar(toolbar);
         presenter = new UserBrowsePresenter(this);
         presenter.setView(this);

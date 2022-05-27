@@ -11,7 +11,7 @@
         android:layout_width="match_parent"
         android:layout_height="0dp"
         android:layout_weight="0.1"
-        android:background="@color/black"
+        android:background="#594A2E"
         />
     <ListView
         android:id="@+id/ems_file_list_view"
