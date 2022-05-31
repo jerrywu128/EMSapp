@@ -129,7 +129,7 @@ public class EditActivity extends BaseActivity implements EditView, View.OnClick
             }
 
         };
-        editText.setFilters(new InputFilter[]{filter,new InputFilter.LengthFilter(30)});
+        editText.setFilters(new InputFilter[]{filter,new InputFilter.LengthFilter(15)});
     }
 
 

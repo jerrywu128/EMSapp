@@ -90,7 +90,7 @@ public class FTPClientTool implements Parcelable {
             }
             Thread.sleep(1000);
 
-            if (count>15){
+            if (count>10){
                 find_ok = true;
                 ok_or_error = 3;
             }

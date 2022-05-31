@@ -3,7 +3,7 @@
     <string name="ERCP">ERCP Mechanical Simulator\n(EMS)</string>
     <string name="qrcode_tp_error">QR Code Type Error!</string>>
     <string name="action_processing">Processing...</string>
-    <string name="launch_text">Please Scan the QR Code on the EMS</string>
+    <string name="launch_text">Please Scan the QR Code\non the EMS</string>
     <string name="Hospital">Hospital</string>
     <string name="Section">Section</string>
     <string name="Job_Number">Student number</string>
