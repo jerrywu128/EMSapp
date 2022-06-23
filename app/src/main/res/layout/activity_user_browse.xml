@@ -26,6 +26,7 @@
                 android:typeface="serif"
                 android:textStyle="bold"
                 />
+
         </androidx.appcompat.widget.Toolbar>
 
 

@@ -15,6 +15,7 @@
         <entry key="app/src/main/res/layout/activity_qrcode_connect_wifi.xml" value="0.21270448988762455" />
         <entry key="app/src/main/res/layout/activity_user_browse.xml" value="0.2006340579710145" />
         <entry key="app/src/main/res/layout/activity_user_info.xml" value="0.40260416666666665" />
+        <entry key="app/src/main/res/layout/check_remove_dialog.xml" value="0.3640625" />
         <entry key="app/src/main/res/layout/content_file_browse.xml" value="0.22708333333333333" />
         <entry key="app/src/main/res/layout/content_file_folder.xml" value="0.2006340579710145" />
         <entry key="app/src/main/res/layout/content_launch.xml" value="0.19630192502532928" />
@@ -22,11 +23,12 @@
         <entry key="app/src/main/res/layout/content_user_folder.xml" value="0.228125" />
         <entry key="app/src/main/res/layout/file_browse_edit_view.xml" value="0.22708333333333333" />
         <entry key="app/src/main/res/layout/load_dialog.xml" value="0.17395833333333333" />
+        <entry key="app/src/main/res/menu/menu_launch.xml" value="0.4036458333333333" />
         <entry key="app/src/main/res/mipmap-anydpi-v26/ic_launcher.xml" value="0.1585" />
         <entry key="app/src/main/res/xml/provider_paths.xml" value="0.184375" />
       </map>
     </option>
   </component>
   <component name="ExternalStorageConfigurationManager" enabled="true" />
-  <component name="ProjectRootManager" version="2" languageLevel="JDK_11" project-jdk-name="11" project-jdk-type="JavaSDK" />
+  <component name="ProjectRootManager" version="2" languageLevel="JDK_11" default="true" project-jdk-name="11" project-jdk-type="JavaSDK" />
 </project>

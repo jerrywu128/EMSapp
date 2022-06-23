@@ -1,6 +1,6 @@
 <resources>
     <string name="app_name">Honestmc EMS</string>
-    <string name="ERCP">ERCP Mechanical Simulator\n(EMS)</string>
+    <string name="ERCP">(ERCP Mechanical Simulator)</string>
     <string name="qrcode_tp_error">QR Code 格式錯誤!</string>
     <string name="action_processing">處理中...</string>
     <string name="launch_text">請掃描EMS上的QR Code</string>
@@ -12,6 +12,8 @@
     <string name="Browse">瀏覽</string>
     <string name="Connecting">EMS連線中.</string>
     <string name="Ftp_Connect_Success">EMS連線成功!</string>
+    <string name="Ftp_Connect_Fail">EMS連線失敗，請確認裝置連線!</string>
+    <string name="WiFi_Connect_Fail">EMS連線失敗，請確認裝置已啟動!</string>
     <string name="edit_null">欄位資訊不可為空!</string>
     <string name="upload_success">上傳成功!</string>
     <string name="upload_fail">上傳失敗，請確認裝置連線!</string>
@@ -19,4 +21,9 @@
     <string name="Cancel">取消</string>
     <string name="download_success">下載成功!</string>
     <string name="download_fail">下載失敗!</string>
+    <string name="remove_all">刪除EMS內所有檔案</string>
+    <string name="delete_fail">刪除失敗，請確認裝置連線</string>
+    <string name="delete_success">刪除成功!</string>
+    <string name="check_action">請輸入\"Honestmc\"來確認操作</string>
+    <string name="input_error">輸入錯誤!</string>
 </resources>

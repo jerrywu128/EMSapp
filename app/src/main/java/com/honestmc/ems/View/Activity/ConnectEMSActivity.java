@@ -1,10 +1,13 @@
 package com.honestmc.ems.View.Activity;
 
+import android.content.Intent;
 import android.os.Build;
 import android.os.Bundle;
 import android.os.Handler;
+import android.os.Looper;
 import android.util.Log;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.honestmc.ems.Presenter.ConnectEMSPresenter;
 import com.honestmc.ems.R;
@@ -91,7 +94,33 @@ public class ConnectEMSActivity extends BaseActivity{
             new Handler().postDelayed(new Runnable() {
                 @Override
                 public void run() {
-                    presenter.change_launch();
+
+                    Log.i("Connectssid",presenter.getssid());
+                    Log.i("Connectssid",wifi_ssid);
+                    int count=0;
+                    while (true) {
+                        Log.i("Connectssid",presenter.getssid());
+                        if (presenter.getssid().equals("null")){
+                            try {
+                                Thread.sleep(1000);
+                                count++;
+                            } catch (InterruptedException e) {
+                                e.printStackTrace();
+                            }
+                        }else{
+                            if (presenter.getssid().equals(wifi_ssid)) {
+                                presenter.change_launch();
+                                break;
+                            } else {
+                                presenter.goBackLaunch();
+                                break;
+                            }
+                        }
+                        if(count>=30){
+                            presenter.goBackLaunch();
+                            break;
+                        }
+                    }
                 }
             }, 7500);
         }

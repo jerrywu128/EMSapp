@@ -1,13 +1,20 @@
 package com.honestmc.ems.View.Activity;
 
 import android.Manifest;
+import android.app.AlertDialog;
+import android.content.DialogInterface;
 import android.os.Bundle;
 import android.text.InputFilter;
 import android.text.Spanned;
+import android.view.LayoutInflater;
+import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.ImageButton;
+import android.widget.ImageView;
 import android.widget.LinearLayout;
+import android.widget.PopupMenu;
 import android.widget.Toast;
 
 import com.honestmc.ems.Presenter.EditPresenter;
@@ -22,7 +29,9 @@ public class EditActivity extends BaseActivity implements EditView, View.OnClick
     private EditPresenter presenter;
     private LinearLayout editLayout;
     private Button start_EMS_Btn,browse_Btn;
+    private PopupMenu devicePopupMenu;
     private EditText hospital_edit,section_edit,job_number_edit,user_name_edit;
+    private ImageView setting;
     public static final int PERMISSION_REQUEST_CODE =100;
     private static String[] PERMISSIONS_STORAGE = {
             Manifest.permission.READ_EXTERNAL_STORAGE,
@@ -42,10 +51,15 @@ public class EditActivity extends BaseActivity implements EditView, View.OnClick
         browse_Btn = (Button) findViewById(R.id.browse_btn);
         browse_Btn.setOnClickListener(this);
 
+        setting = (ImageView) findViewById(R.id.edit_setting);
+        setting.setOnClickListener(this);
+
         hospital_edit = (EditText) findViewById(R.id.hospital_title);
         section_edit = (EditText) findViewById(R.id.section_title);
         job_number_edit = (EditText) findViewById(R.id.job_number_title);
         user_name_edit = (EditText) findViewById(R.id.user_name);
+
+
 
         setEditTextInhibitInputSpeChat(hospital_edit);
         setEditTextInhibitInputSpeChat(section_edit);
@@ -85,6 +99,9 @@ public class EditActivity extends BaseActivity implements EditView, View.OnClick
                 break;
             case R.id.browse_btn:
                     presenter.openFileBrowse();
+                break;
+            case R.id.edit_setting:
+                    presenter.settingMenu(setting);
                 break;
         }
     }
@@ -132,5 +149,60 @@ public class EditActivity extends BaseActivity implements EditView, View.OnClick
         editText.setFilters(new InputFilter[]{filter,new InputFilter.LengthFilter(15)});
     }
 
+    @Override
+    public void showPopupMenu(View view){
+
+        devicePopupMenu = new PopupMenu(this,view);
+        devicePopupMenu.getMenuInflater().inflate(R.menu.menu_launch,devicePopupMenu.getMenu());
+        devicePopupMenu.setOnMenuItemClickListener(new PopupMenu.OnMenuItemClickListener() {
+            @Override
+            public boolean onMenuItemClick(MenuItem item) {
+                int id = item.getItemId();
+
+                if(id == R.id.remove_all){
+                    LayoutInflater inflater = LayoutInflater.from(EditActivity.this);
+                    final View v = inflater.inflate(R.layout.check_remove_dialog, null);
+
+                    new AlertDialog.Builder(EditActivity.this)
+                            .setTitle(R.string.remove_all)
+                            .setMessage(R.string.check_action)
+                            .setCancelable(false)
+                            .setView(v)
+                            .setPositiveButton(R.string.Sure, new DialogInterface.OnClickListener() {
+                                @Override
+                                public void onClick(DialogInterface dialog, int which) {
+                                    EditText editText = (EditText) (v.findViewById(R.id.check_remove_text));
+                                    if ("Honestmc".equals(editText.getText().toString())) {
+                                        presenter.remove_all();
+
+                                    }else{
+                                        Toast.makeText(EditActivity.this,R.string.input_error, Toast.LENGTH_SHORT).show();
+                                    }
+
+
+                                }
+                            })
+                            .setNegativeButton(R.string.Cancel, new DialogInterface.OnClickListener() {
+                                @Override
+                                public void onClick(DialogInterface dialog, int which) {
+                                    //cancel
+                                }
+                            })
+                            .show();
+                }
+
+                return false;
+            }
+        });
+
+        devicePopupMenu.setOnDismissListener(new PopupMenu.OnDismissListener() {
+            @Override
+            public void onDismiss(PopupMenu menu) {
+                //close menu
+            }
+        });
+
+        devicePopupMenu.show();
+    }
 
 }

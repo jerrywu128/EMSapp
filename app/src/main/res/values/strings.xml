@@ -1,6 +1,6 @@
 <resources>
     <string name="app_name">Honestmc EMS</string>
-    <string name="ERCP">ERCP Mechanical Simulator\n(EMS)</string>
+    <string name="ERCP">(ERCP Mechanical Simulator)</string>
     <string name="qrcode_tp_error">QR Code Type Error!</string>>
     <string name="action_processing">Processing...</string>
     <string name="launch_text">Please Scan the QR Code\non the EMS</string>
@@ -12,11 +12,18 @@
     <string name="Browse">Browse</string>
     <string name="Connecting">EMS Connecting.</string>
     <string name="Ftp_Connect_Success">EMS Connect Success!</string>
+    <string name="Ftp_Connect_Fail">EMS Connect Failed, please confirm the device connection!</string>
+    <string name="WiFi_Connect_Fail">EMS Connect Failed, please confirm the device on!</string>
     <string name="edit_null">Info cannot be empty!</string>
     <string name="upload_success">Upload Success!</string>
     <string name="upload_fail">Upload failed, please confirm the device connection!</string>
+    <string name="delete_fail">Delete failed, please confirm the device connection!</string>
     <string name="downloadMp4">Download Video</string>
     <string name="Cancel">Cancel</string>
     <string name="download_success">Download Success!</string>
     <string name="download_fail">Download Failed!</string>
+    <string name="remove_all">Remove EMS All File</string>
+    <string name="delete_success">Remove Success!</string>
+    <string name="check_action">Please enter \"Honestmc\" to confirm the operation</string>
+    <string name="input_error">input error!</string>
 </resources>

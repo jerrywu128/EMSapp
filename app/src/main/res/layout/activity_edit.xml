@@ -15,15 +15,31 @@
         android:background="@color/white"
         android:orientation="vertical"
         android:visibility="visible">
-
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="0.8"
+        android:background="@color/white"
+        android:orientation="horizontal"
+        android:visibility="visible">
+        <TextView
+            android:layout_width="0dp"
+            android:layout_weight="0.3"
+            android:layout_height="match_parent"/>
         <ImageView
-            android:layout_width="match_parent"
-            android:layout_height="0dp"
-            android:layout_margin="8dp"
-            android:layout_weight="0.6"
+            android:layout_width="0dp"
+            android:layout_weight="3"
+            android:layout_height="match_parent"
             android:padding="4dp"
             android:src="@drawable/honestmclogo" />
-
+        <ImageView
+            android:id="@+id/edit_setting"
+            android:layout_width="0dp"
+            android:layout_weight="0.3"
+            android:layout_height="match_parent"
+            android:padding="4dp"
+            android:src="@drawable/ic_baseline_settings_24" />
+    </LinearLayout>
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="0dp"
@@ -36,6 +52,10 @@
                 android:layout_height="0dp"
                 android:layout_gravity="center"
                 android:layout_weight="2.7"
+                android:gravity="center"
+                android:text="EMS"
+                android:textSize="50dp"
+                android:textColor="@color/white"
                 android:background="#8b7347"
                />
             <ImageView
@@ -46,6 +66,7 @@
                 android:adjustViewBounds="true"
                 android:background="#8b7347"
                 android:src="@drawable/emslogo"
+                android:visibility="gone"
                 />
 
             <TextView

@@ -33,7 +33,6 @@ public class MWifiManager {
     ConnectivityManager.NetworkCallback mNetwork;
 
     public MWifiManager(Activity activity) {
-
         this.activity = activity;
     }
 
@@ -47,13 +46,13 @@ public class MWifiManager {
 
         if (!isWifiConnected(context)) {
             Log.i(TAG, "getSsid wifi not connect!");
-            return null;
+            return "null";
         }
         WifiManager mWifi = (WifiManager) context.getApplicationContext().getSystemService(Context.WIFI_SERVICE);
         WifiInfo wifiInfo = mWifi.getConnectionInfo();
         if (wifiInfo == null || wifiInfo.getSSID() == null) {
             Log.i(TAG, "getSsid wifiInfo is null");
-            return null;
+            return "null";
         }
         String ssid = wifiInfo.getSSID();
         if (ssid.contains("0x") || ssid.contains("<unknown ssid>")) {
@@ -61,7 +60,7 @@ public class MWifiManager {
             NetworkInfo wifiInfo2 = mConnectivityManager.getNetworkInfo(ConnectivityManager.TYPE_WIFI);
             Log.i(TAG, "getSsid wifiInfo2:" + wifiInfo2);
             if (wifiInfo2 == null || wifiInfo2.getExtraInfo() == null) {
-                return null;
+                return "null";
             } else {
                 String wifiName = wifiInfo2.getExtraInfo();
                 return wifiName.replaceAll("\"", "");
@@ -274,12 +273,13 @@ public class MWifiManager {
             wifiManager.saveConfiguration();
             wifiManager.disconnect();
         }
-
-
         int netid = wifiManager.addNetwork(conf);
+
+
         if (netid >= 0) {
             // Try to disable the current network and start a new one.
             if (wifiManager.enableNetwork(netid, true)) {
+                wifiManager.reconnect();
                 Log.i(TAG, "Associating to network " + conf.SSID);
                 wifiManager.saveConfiguration();
             } else {

@@ -12,6 +12,7 @@ import android.os.Looper;
 import android.util.Log;
 import android.widget.Toast;
 
+import com.honestmc.ems.R;
 import com.honestmc.ems.View.Activity.ConnectEMSActivity;
 import com.honestmc.ems.View.Activity.EditActivity;
 import com.honestmc.ems.View.Activity.LaunchActivity;
@@ -45,7 +46,14 @@ public class ConnectEMSPresenter extends BasePresenter{
         activity.finish();
     }
 
+    public void goBackLaunch(){
 
+        Toast.makeText(activity,R.string.WiFi_Connect_Fail,Toast.LENGTH_LONG).show();
+
+        activity.finish();
+        Intent mainIntent = new Intent(activity, LaunchActivity.class);
+        activity.startActivity(mainIntent);
+    }
 
     public void connectWifiQ(Context context, String ssid, String password){
         wifiManager = (WifiManager) context.getApplicationContext().getSystemService(activity.WIFI_SERVICE);
@@ -67,10 +75,8 @@ public class ConnectEMSPresenter extends BasePresenter{
     }
 
     public String getssid(){
-        wifiManager = (WifiManager) activity.getApplicationContext().getSystemService(activity.WIFI_SERVICE);
-        WifiInfo info = wifiManager.getConnectionInfo ();
-        String ssid  = info.getSSID();
-        return ssid;
+
+        return mWifi.getSsid(activity);
 
     }
 
@@ -83,4 +89,6 @@ public class ConnectEMSPresenter extends BasePresenter{
             return true;
 
     }
+
+
 }

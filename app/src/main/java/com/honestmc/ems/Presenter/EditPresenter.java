@@ -1,11 +1,16 @@
 package com.honestmc.ems.Presenter;
 
 import android.app.Activity;
+import android.app.AlertDialog;
 import android.content.Context;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
 import android.os.Looper;
 import android.util.Log;
+import android.view.LayoutInflater;
+import android.view.View;
+import android.widget.EditText;
 import android.widget.Toast;
 
 import com.honestmc.ems.R;
@@ -201,7 +206,7 @@ public class EditPresenter extends BasePresenter{
                 }catch (Exception e){
                     Log.e("ftp","connect error!");
                     Looper.prepare();
-                    Toast.makeText(activity,e.toString(),Toast.LENGTH_LONG).show();
+                    Toast.makeText(activity,activity.getString(R.string.Ftp_Connect_Fail),Toast.LENGTH_LONG).show();
                     Looper.loop();
                 }
             }
@@ -212,9 +217,85 @@ public class EditPresenter extends BasePresenter{
 
     }
 
+    public void settingMenu(View view){
+        editView.showPopupMenu(view);
+    }
+
     public void openFileBrowse(){
         Intent mainIntent = new Intent(activity, UserBrowseActivity.class);
         activity.startActivity(mainIntent);
     }
+
+    public void remove_all(){
+        Thread thread = new Thread(new Runnable(){
+            @Override
+            public void run() {
+
+                try{
+
+                    boolean change = ftpClient.changeWorkingDirectory("/home/pi/report");
+                    if (change) {
+                        FTPFile[] files = ftpClient.listFiles();
+                        int files_length = 0;
+                        int delete_count=0;
+                        for(FTPFile file : files){
+
+                            Log.i("fileis",file.toString());
+                            if(file.isDirectory()){
+                                files_length++;
+                                if(deleteDirectory("/home/pi/report/"+file.getName(),ftpClient)){
+                                    delete_count++;
+                                }
+                            }
+
+                        }
+
+                        if (files_length==delete_count) {
+                            Log.i("ftp-file","刪除成功!");
+                            Looper.prepare();
+                            Toast.makeText(activity,activity.getString(R.string.delete_success),Toast.LENGTH_LONG).show();
+                            Looper.loop();
+                        }else {
+                            Log.e("ftp-file","刪除失敗!");
+                            Looper.prepare();
+                            Toast.makeText(activity,activity.getString(R.string.delete_fail),Toast.LENGTH_LONG).show();
+                            Looper.loop();
+
+                        }
+                    }
+
+
+                }catch (Exception e){
+                    Log.e("ftp-file",e.toString());
+                    EMSProgressDialog.closeProgressDialog();
+                }
+            }
+        });
+
+        thread.start();
+    }
+
+    private boolean deleteDirectory(String path,FTPClient ftpClient) throws Exception{
+        FTPFile[] files=ftpClient.listFiles(path);
+        if(files.length>0) {
+            for (FTPFile ftpFile : files) {
+                if(ftpFile.isDirectory()){
+                    Log.i("deleteDirectory","trying to delete directory "+path + "/" + ftpFile.getName());
+                    deleteDirectory(path + "/" + ftpFile.getName(), ftpClient);
+                }
+                else {
+                    String deleteFilePath = path + "/" + ftpFile.getName();
+                    Log.i("deleteDirectory","deleting file {"+ deleteFilePath+"}");
+                    ftpClient.deleteFile(deleteFilePath);
+                }
+
+            }
+        }
+        Log.i("deleteDirectory","deleting directory "+path);
+        boolean result = ftpClient.removeDirectory(path);
+        return result;
+
+    }
+
 
 }

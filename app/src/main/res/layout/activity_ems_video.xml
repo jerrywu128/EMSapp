@@ -34,12 +34,6 @@
 
 
 
-
-
-
-
-
-
         <ImageButton
             android:id="@+id/local_pb_back"
             android:layout_width="wrap_content"
